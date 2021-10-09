@@ -5,8 +5,7 @@
       <title>E-WALLET</title>
       <script src="js/jquery.min.js"></script>
       <script src="js/bootstrap.js"></script>
-      <script src="js/jquery.validate.min.js"></script>
-      <script src="js/sweetalert.min.js"></script>
+
       <link href="css/bootstrap.css" rel="stylesheet">
       <link href="css/app.css" rel="stylesheet">
 	  <style>
@@ -141,6 +140,56 @@
 	  });
 	  
 	  </script>
+	  
+	  	  <script>
+	  
+	    var token = "";
+		
+		   function aztira_login(){
+				var arr = { username: $("#email").val(), password: $("#password").val() };
+				$.ajax({
+						type: "post",
+						url: "http://localhost:7899/login",
+						beforeSend: function(request) {
+							//request.setRequestHeader("x-api-key", X_API);
+						},
+						contentType: "application/json",
+						data: JSON.stringify(arr),
+						dataType: "json",
+						success: function (response) {
+							alert(response.token);
+							token = response.token;
+						}, 
+						error: function(res){
+							
+						}
+					});
+			}
+			
+		
+		   function aztira_list(){
+				$.ajax({
+						type: "get",
+						url: "http://localhost:7899/product/all",
+						   headers: {
+							  'Authorization': 'Bearer ' + token
+						   },
+						contentType: "application/json",
+						data: {},
+						dataType: "json",
+						success: function (response) {
+							
+						}, 
+						error: function(res){
+							
+						}
+					});
+			}
+			
+		
+			
+	  
+	  </script>
    <body>
    <div id="nn_header"></div>
 
@@ -157,6 +206,7 @@
             <input type="text" class="form-control" id="password"   required >
          </div>
          <button id="btnRegWallet" onclick="aztira_login()"  class="btn btn-success" type="button">Register Now</button>
+         <button id="btnListProduk" onclick="aztira_list()"  class="btn btn-default" type="button">List Produk</button>
       </form>
       <br />
       <div id="results"></div>
@@ -165,28 +215,12 @@
 
    
    <script>
+   var token = "";
+   $(document).ready(function(){
+		
+   });
    
-   function aztira_login(){
-		var arr = { username: $("#email").val(), password: $("#password").val() };
-		$.ajax({
-                type: "post",
-                url: "http://localhost:7899/login",
-				beforeSend: function(request) {
-					//request.setRequestHeader("x-api-key", X_API);
-				},
-				contentType: "application/json",
-                data: JSON.stringify(arr),
-                dataType: "json",
-                success: function (response) {
-					alert(response.token);
-				}, 
-				error: function(res){
-					
-				}
-            });
-	}
-   
-   
+
    </script>
 
    </body>
