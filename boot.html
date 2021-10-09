@@ -179,7 +179,16 @@
 						dataType: "json",
 						success: function (response) {
 							
-						}, 
+							$.each(response, function(index,jsonObject){
+								$.each(jsonObject, function(key,val){
+									console.log("key : "+key+" ; value : "+val);
+								});
+							});
+
+							$.each(response, function(i, item) {
+								alert(item.name);
+							});
+													}, 
 						error: function(res){
 							
 						}
