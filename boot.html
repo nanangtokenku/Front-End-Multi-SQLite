@@ -2,7 +2,7 @@
 <html>
    <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>E-WALLET</title>
+      <title>E-BOOT</title>
       <script src="js/jquery.min.js"></script>
       <script src="js/bootstrap.js"></script>
 
@@ -179,14 +179,16 @@
 						dataType: "json",
 						success: function (response) {
 							
+							/*
 							$.each(response, function(index,jsonObject){
 								$.each(jsonObject, function(key,val){
 									console.log("key : "+key+" ; value : "+val);
 								});
 							});
+							*/
 
 							$.each(response, function(i, item) {
-								alert(item.name);
+								console.log(item.name);
 							});
 													}, 
 						error: function(res){
